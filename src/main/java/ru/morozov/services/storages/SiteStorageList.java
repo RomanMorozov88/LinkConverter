@@ -45,6 +45,18 @@ public class SiteStorageList implements SiteStorage {
     }
 
     @Override
+    public SiteObj getByLoginAndPassword(SiteObj siteObj) {
+        SiteObj result = null;
+        SiteObj target = this.getByLogin(siteObj.getLogin());
+        if (target != null) {
+            if (passwordEncoder.matches(siteObj.getPassword(), target.getPassword())) {
+                result = target;
+            }
+        }
+        return result;
+    }
+
+    @Override
     public List<SiteObj> getAllSites() {
         return new ArrayList<>(this.sites);
     }

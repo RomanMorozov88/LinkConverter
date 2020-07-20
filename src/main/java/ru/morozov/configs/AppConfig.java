@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.morozov.services.UserDetailsServiceImpl;
 import ru.morozov.services.generators.LoginGenerator;
 import ru.morozov.services.generators.PagesKeyGenerator;
 import ru.morozov.services.generators.PasswordGenerator;
 import ru.morozov.services.generators.SimpleCodeGenerator;
+import ru.morozov.services.security.JWTUtil;
 import ru.morozov.services.storages.PageStorage;
 import ru.morozov.services.storages.PageStorageMap;
 import ru.morozov.services.storages.SiteStorage;
@@ -25,6 +28,16 @@ public class AppConfig {
     @Bean
     public SimpleCodeGenerator simpleCodeGenerator() {
         return new SimpleCodeGenerator();
+    }
+
+    @Bean
+    public JWTUtil jwtUtil() {
+        return new JWTUtil();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsServiceImpl();
     }
 
     @Bean

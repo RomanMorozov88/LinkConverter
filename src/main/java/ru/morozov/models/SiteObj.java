@@ -1,5 +1,7 @@
 package ru.morozov.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Objects;
  */
 public class SiteObj {
 
+    @JsonIgnore
     private String name;
     private String login;
     private String password;

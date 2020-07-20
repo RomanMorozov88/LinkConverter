@@ -10,6 +10,8 @@ public interface SiteStorage {
 
     SiteObj getBySiteName(String siteName);
 
+    SiteObj getByLoginAndPassword(SiteObj siteObj);
+
     List<SiteObj> getAllSites();
 
     boolean saveSite(SiteObj siteObj);
