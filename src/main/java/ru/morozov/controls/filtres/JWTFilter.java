@@ -16,13 +16,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-import static org.springframework.util.StringUtils.hasText;
-
 @Component
 public class JWTFilter extends GenericFilterBean {
-
-    private static final String AUTHORIZATION = "Authorization";
-    private static final String TOKEN_PREFIX = "Bearer ";
 
     @Autowired
     private JWTUtil jwtUtil;
@@ -33,7 +28,7 @@ public class JWTFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
-        String token = this.getTokenFromRequest((HttpServletRequest) servletRequest);
+        String token = jwtUtil.getTokenFromRequest((HttpServletRequest) servletRequest);
         if (token != null && jwtUtil.validateToken(token)) {
             String siteLogin = jwtUtil.getLoginFromToken(token);
             UserDetails userDetails = userDetailsService.loadUserByUsername(siteLogin);
@@ -42,15 +37,6 @@ public class JWTFilter extends GenericFilterBean {
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
         filterChain.doFilter(servletRequest, servletResponse);
-    }
-
-    private String getTokenFromRequest(HttpServletRequest request) {
-        String result = null;
-        String bearer = request.getHeader(AUTHORIZATION);
-        if (hasText(bearer) && bearer.startsWith(TOKEN_PREFIX)) {
-            result = bearer.substring(TOKEN_PREFIX.length());
-        }
-        return result;
     }
 
 }

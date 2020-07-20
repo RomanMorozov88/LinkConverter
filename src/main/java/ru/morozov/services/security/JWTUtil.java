@@ -8,13 +8,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import ru.morozov.models.SiteObj;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import static org.springframework.util.StringUtils.hasText;
+
 public class JWTUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JWTUtil.class);
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String TOKEN_PREFIX = "Bearer ";
 
     @Value("${jwt.secret}")
     private String secret;
@@ -52,6 +57,15 @@ public class JWTUtil {
     public String getLoginFromToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         return claims.getSubject();
+    }
+
+    public String getTokenFromRequest(HttpServletRequest request) {
+        String result = null;
+        String bearer = request.getHeader(AUTHORIZATION);
+        if (hasText(bearer) && bearer.startsWith(TOKEN_PREFIX)) {
+            result = bearer.substring(TOKEN_PREFIX.length());
+        }
+        return result;
     }
 
 }
