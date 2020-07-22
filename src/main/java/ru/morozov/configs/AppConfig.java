@@ -13,10 +13,7 @@ import ru.morozov.services.generators.PagesKeyGenerator;
 import ru.morozov.services.generators.PasswordGenerator;
 import ru.morozov.services.generators.SimpleCodeGenerator;
 import ru.morozov.services.security.JWTUtil;
-import ru.morozov.services.storages.PageStorage;
-import ru.morozov.services.storages.PageStorageMap;
-import ru.morozov.services.storages.SiteStorage;
-import ru.morozov.services.storages.SiteStorageList;
+import ru.morozov.services.storages.*;
 
 @Configuration
 @ComponentScan("ru.morozov")
@@ -47,12 +44,12 @@ public class AppConfig {
 
     @Bean
     public SiteStorage siteStorage() {
-        return new SiteStorageList();
+        return new SiteStorageRepo();
     }
 
     @Bean
     public PageStorage pageStorage() {
-        return new PageStorageMap();
+        return new PageStorageRepo();
     }
 
     @Bean

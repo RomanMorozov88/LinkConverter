@@ -2,6 +2,9 @@ package ru.morozov.models.modelsutil;
 
 import ru.morozov.models.PageObj;
 
+/**
+ * POJO для формирования ответа StatisticControl`ом.
+ */
 public class PageStatisticUtil {
 
     private String url;
@@ -11,14 +14,9 @@ public class PageStatisticUtil {
     }
 
     public PageStatisticUtil(PageObj pageObj) {
-        this.url = pageObj.getOriginalURL();
+        this.url = pageObj.getOriginalUrl();
         this.total = pageObj.getCount();
     }
-
-//    public void setDataFromPage(PageObj pageObj) {
-//        this.url = pageObj.getOriginalURL();
-//        this.total = pageObj.getCount();
-//    }
 
     public String getUrl() {
         return url;

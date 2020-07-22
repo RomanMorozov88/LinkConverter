@@ -46,8 +46,8 @@ public class PageStorageMap implements PageStorage {
     @Override
     public boolean savePage(PageObj pageObj) {
         boolean result = false;
-        if (this.pages.get(pageObj.getConvertedURL()) == null) {
-            this.pages.put(pageObj.getConvertedURL(), pageObj);
+        if (this.pages.get(pageObj.getConvertedUrl()) == null) {
+            this.pages.put(pageObj.getConvertedUrl(), pageObj);
             result = true;
         }
         return result;
@@ -57,4 +57,11 @@ public class PageStorageMap implements PageStorage {
     public void deletePage(PageObj pageObj) {
         this.pages.remove(pageObj);
     }
+
+    @Override
+    public void updateCount(PageObj pageObj) {
+        pageObj.incrCount();
+    }
+
+    ;
 }

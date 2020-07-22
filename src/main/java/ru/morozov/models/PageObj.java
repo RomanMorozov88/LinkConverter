@@ -1,16 +1,23 @@
 package ru.morozov.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * Класс, описывающий страницу.
  */
+@Entity
+@Table(name = "pages")
 public class PageObj {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "parent_site")
     private SiteObj parentSite;
-    private String originalURL;
-    private String convertedURL;
+    private String originalUrl;
+    private String convertedUrl;
     private int count = 0;
 
     public PageObj() {
@@ -32,20 +39,20 @@ public class PageObj {
         this.parentSite = parentSite;
     }
 
-    public String getOriginalURL() {
-        return originalURL;
+    public String getOriginalUrl() {
+        return originalUrl;
     }
 
-    public void setOriginalURL(String originalURL) {
-        this.originalURL = originalURL;
+    public void setOriginalUrl(String originalUrl) {
+        this.originalUrl = originalUrl;
     }
 
-    public String getConvertedURL() {
-        return convertedURL;
+    public String getConvertedUrl() {
+        return convertedUrl;
     }
 
-    public void setConvertedURL(String convertedURL) {
-        this.convertedURL = convertedURL;
+    public void setConvertedUrl(String convertedUrl) {
+        this.convertedUrl = convertedUrl;
     }
 
     public int getCount() {
@@ -68,12 +75,12 @@ public class PageObj {
         return id == pageObj.id &&
                 count == pageObj.count &&
                 Objects.equals(parentSite, pageObj.parentSite) &&
-                Objects.equals(originalURL, pageObj.originalURL) &&
-                Objects.equals(convertedURL, pageObj.convertedURL);
+                Objects.equals(originalUrl, pageObj.originalUrl) &&
+                Objects.equals(convertedUrl, pageObj.convertedUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, parentSite, originalURL, convertedURL, count);
+        return Objects.hash(id, parentSite, originalUrl, convertedUrl, count);
     }
 }

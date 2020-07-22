@@ -16,8 +16,8 @@ public class RedirectControl {
     @GetMapping("/redirect/{key}")
     public void getRegResult(@PathVariable String key, HttpServletResponse response) {
         PageObj target = this.pageStorage.getByKey(key);
-        target.incrCount();
-        response.setHeader("REDIRECT", target.getOriginalURL());
+        pageStorage.updateCount(target);
+        response.setHeader("REDIRECT", target.getOriginalUrl());
         response.setStatus(302);
     }
 

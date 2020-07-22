@@ -10,7 +10,7 @@ public class PageCodeUtil {
     private String code;
 
     public void setCodeFromPage(PageObj pageObj) {
-        this.code = pageObj.getConvertedURL();
+        this.code = pageObj.getConvertedUrl();
     }
 
     public String getCode() {

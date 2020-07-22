@@ -15,6 +15,9 @@ import java.util.Date;
 
 import static org.springframework.util.StringUtils.hasText;
 
+/**
+ * Создание\извлечение JWT.
+ */
 public class JWTUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JWTUtil.class);

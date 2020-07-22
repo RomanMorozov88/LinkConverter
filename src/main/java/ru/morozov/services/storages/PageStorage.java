@@ -12,9 +12,11 @@ public interface PageStorage {
     List<PageObj> getAllPagesByParentSite(SiteObj parentSiteName);
 
     PageObj getByKey(String key);
-
+    
     boolean savePage(PageObj pageObj);
 
     void deletePage(PageObj pageObj);
+
+    void updateCount(PageObj pageObj);
 
 }

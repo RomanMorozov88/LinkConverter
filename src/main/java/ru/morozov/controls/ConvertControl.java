@@ -40,8 +40,8 @@ public class ConvertControl {
 
         }
         PageObj pageObj = new PageObj();
-        pageObj.setOriginalURL(inputData.getUrl());
-        pageObj.setConvertedURL(this.pagesKeyGenerator.keyGenerate());
+        pageObj.setOriginalUrl(inputData.getUrl());
+        pageObj.setConvertedUrl(this.pagesKeyGenerator.keyGenerate());
         pageObj.setParentSite(parentSite);
         this.pageStorage.savePage(pageObj);
         code.setCodeFromPage(pageObj);

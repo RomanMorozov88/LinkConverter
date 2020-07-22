@@ -2,15 +2,21 @@ package ru.morozov.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 /**
  * Класс, описывающий сайт(пользователя)
  */
+@Entity
+@Table(name = "sites")
 public class SiteObj {
 
     @JsonIgnore
     private String name;
+    @Id
     private String login;
     private String password;
 
